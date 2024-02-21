@@ -1,11 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes , Route } from 'react-router-dom';
+import Register from './components/Forms/Register';
+import Login from './components/Forms/Login';
+import Navbar from './components/Navbar/Navbar';
+import Counter from './components/Forms/Counter';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   return (
-    <div className="App bg-black">
-      <h2 className='text-center p-2  m-6 underline text-red-200'>Hello World!</h2>
-    </div>
+    <BrowserRouter>
+      <Navbar/>
+        <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/counter" element={<Counter />}></Route>
+        </Routes>
+    </BrowserRouter>
   );
 }
 

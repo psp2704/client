@@ -95,7 +95,7 @@ export const AuthContextProvider = ({children}) =>{
             }
         }
         try {
-           const res = axios.post(`${API_URL_USER}/login`, formdata ,config);
+           const res = await axios.post(`${API_URL_USER}/login`, formdata ,config);
 
         //    if(res?.data?.status === "success"){
         //     dispatch({

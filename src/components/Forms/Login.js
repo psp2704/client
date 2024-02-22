@@ -20,11 +20,23 @@ export default function Login() {
   }
 
   //handle the submit  form
-  const  handleSubmit = (e) => {
-    e.preventDefault();
-    //login action
-    login(formdata);
+  // const  handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   //login action
+  //   login(formdata);
     
+  // }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Await the login function
+      await login(formdata);
+      console.log('successfully logged');
+      // Redirect or perform other actions upon successful login
+    } catch (error) {
+      console.log(error);
+      // Handle login errors here
+    }
   }
 
 

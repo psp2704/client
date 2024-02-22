@@ -1,56 +1,53 @@
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext/AuthContext"
+import { useState } from "react";
 
-
-
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 export default function Login() {
 
-  const state = useContext(AuthContext);
-  console.log(state)
+  const {login} = useContext(AuthContext)
+
+  //handle the state
+  const [formdata, setFormdata] = useState({
+    email: "", password: ""
+  });
+
+  const {email, password} = formdata;
+
+  //handle data change
+  const onChangeInput = (e) =>{
+    console.log(e.target.name)
+    return setFormdata({...formdata, [e.target.name]:e.target.value});
+  }
+
+  //handle the submit  form
+  const  handleSubmit = (e) => {
+    e.preventDefault();
+    //login action
+    login(formdata);
+    
+  }
+
+
     return (
       <>
-        {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            /> */}
+      
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
             </h2>
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email address
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={onChangeInput}
+                    value={email}
                     id="email"
                     name="email"
                     type="email"
@@ -74,6 +71,8 @@ export default function Login() {
                 </div>
                 <div className="mt-2">
                   <input
+                    onChange={onChangeInput}
+                    value={password}
                     id="password"
                     name="password"
                     type="password"

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Login() {
 
-  const {login} = useContext(AuthContext)
+  const {state, login} = useContext(AuthContext)
 
   //handle the state
   const [formdata, setFormdata] = useState({
@@ -28,15 +28,13 @@ export default function Login() {
   // }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+  
       // Await the login function
-      await login(formdata);
-      console.log('successfully logged');
+    login(formdata);
       // Redirect or perform other actions upon successful login
-    } catch (error) {
-      console.log(error);
+   
       // Handle login errors here
-    }
+    console.log(state?.error)
   }
 
 
@@ -48,6 +46,11 @@ export default function Login() {
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
             </h2>
+            
+                {state?.error &&(
+                  <p className="text-red-500 text-center">{state?.error}</p>
+                )}
+              
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

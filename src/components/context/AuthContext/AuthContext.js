@@ -16,7 +16,6 @@ export const API_URL_USER = "http://localhost:7000/api/v1/user";
 //create the aulthe context
 export const AuthContext = createContext();
 
-
 //crete initial state 
 const INITIAL_STATE = {
   userAuth: JSON.parse(localStorage.getItem("userAuth")),
@@ -30,14 +29,14 @@ const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     //Register
-    case "REGISTER_SUCCESS":
+    case REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
         userAuth: payload,
       };
-    case "REGISTER_FAIL":
+    case REGISTER_FAIL:
       return {
         ...state,
         error: payload,
@@ -62,14 +61,14 @@ const reducer = (state, action) => {
         userAuth: null,
       };
     // Profile
-    case "FETCH_PROFILE_SUCCESS":
+    case FETCH_PROFILE_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
         profile: payload,
       };
-    case "FETCH_PROFILE_FAIL":
+    case FETCH_PROFILE_FAIL:
       return {
         ...state,
         loading: false,
@@ -77,7 +76,7 @@ const reducer = (state, action) => {
         profile: null,
       };
     // logout
-    case "LOGOUT":
+    case LOGOUT:
       //remove from storage
       localStorage.removeItem("userAuth");
       return {
@@ -108,47 +107,50 @@ export const AuthContextProvider = ({ children }) => {
 
       if (res?.data?.status === "success") {
         dispatch({
-          type: "LOGIN_SUCCESS",
+          type: LOGIN_SUCCESS,
           payload: res.data
         })
       }
       //Redirect
-      window.location.href = "/"
+      window.location.href = "/dashboard"
     } catch (error) {
       console.log(error)
       dispatch({
-        type: 'LOGIN_FAILED',
+        type: LOGIN_FAILED,
         payload: error?.response?.data?.message,
       });
     }
   }
 
   //get the user profile
-  const getProfile = async() => {
+  const getProfile = async () => {
 
     const config = {
-      headers : {
-        "Content-Type" : "application/json",
-        Authorization :  `Bearer ${state?.userAuth?.token}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state?.userAuth?.token}5`
       }
     }
 
     try {
-      const  res = await axios.get(`${API_URL_USER}/profile`, config);
-      dispatch({type:"FETCH_PROFILE_SUCCESS",payload:res.data})
+      const res = await axios.get(`${API_URL_USER}/profile`, config);
+      dispatch({ type: FETCH_PROFILE_SUCCESS, payload: res.data })
       console.log(res?.data);
 
       console.log(`Bearer ${state?.userAuth?.token}`)
-    }catch(error){
-      console.log("Error in getting Profile");
-      console.log(error)
+    } catch (error) {
+      
+      dispatch({
+        type:FETCH_PROFILE_FAIL,
+        payload:error?.response?.data?.message
+      })
     }
   };
-  
+
 
 
   return (
-    <AuthContext.Provider value={{ state, login, getProfile }}>
+    <AuthContext.Provider value={{ state, login, getProfile, error: state?.error }}>
       {children}
     </AuthContext.Provider>
   )

@@ -7,6 +7,9 @@ import Navbar from './components/Navbar/Navbar';
 import Counter from './components/Forms/Counter';
 import HomePage from './components/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
+import AccountSummary from './components/Dashbaord/AccountSummary';
+import AccountDashboard from './components/Dashbaord/AccountDashboard';
+
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/counter" element={<Counter />}></Route>
+            <Route path="/dashboard" element={<AccountDashboard />}></Route>
         </Routes>
     </BrowserRouter>
   );

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext/AuthContext'
 
 function Profile() {
     const { state, getProfile } = useContext(AuthContext);
 
-    const handleFetchProfile = () => {
+    useEffect( () => {
         getProfile();
-    }
+    },[])
 
     return (
         <div>
@@ -17,7 +17,7 @@ function Profile() {
                 <div>{state?.profile?.userData?.email}</div>
             </div>
             <hr />
-            <button onClick={handleFetchProfile} className='px-3 py-2 w-20 m-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg'>Data</button>
+            <button className='px-3 py-2 w-20 m-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg'>Data</button>
         </div>
     )
 }

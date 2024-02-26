@@ -75,6 +75,13 @@ const reducer = (state, action) => {
         error: payload,
         profile: null,
       };
+    case "ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+        profile: null,
+      };
     // logout
     case LOGOUT:
       //remove from storage
@@ -93,7 +100,6 @@ const reducer = (state, action) => {
 // create the provider for the context 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-
 
   //login action
   const login = async (formdata) => {
@@ -128,7 +134,7 @@ export const AuthContextProvider = ({ children }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${state?.userAuth?.token}5`
+        Authorization: `Bearer ${state?.userAuth?.token}`
       }
     }
 
@@ -139,18 +145,34 @@ export const AuthContextProvider = ({ children }) => {
 
       console.log(`Bearer ${state?.userAuth?.token}`)
     } catch (error) {
-      
+
       dispatch({
-        type:FETCH_PROFILE_FAIL,
-        payload:error?.response?.data?.message
+        type: "ERROR",
+        payload: error?.response?.data?.message
       })
     }
   };
 
+  //logout
+  const logoutUser = async () => {
 
+    localStorage.removeItem("userAuth");
+    try {
+      dispatch({ type: LOGOUT });
+
+      //Redirect
+      window.location.href = "/"
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error?.response?.data?.message
+      })
+      console.log(error)
+    }
+  }
 
   return (
-    <AuthContext.Provider value={{ state, login, getProfile, error: state?.error }}>
+    <AuthContext.Provider value={{ state, token: state?.userAuth?.token, login, getProfile, error: state?.error, logoutUser }}>
       {children}
     </AuthContext.Provider>
   )

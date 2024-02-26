@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const AccountList = ({ accounts }) => {
   return (
     <>
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="container px-4 mx-auto">
           {/* Nt account msg */}
           <div className="max-w-3xl mx-auto">

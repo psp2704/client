@@ -10,7 +10,6 @@ import {
   REGISTER_FAIL,
 } from "./authActionTypes";
 
-
 export const API_URL_USER = "http://localhost:7000/api/v1/user";
 
 //create the aulthe context
@@ -110,7 +109,6 @@ export const AuthContextProvider = ({ children }) => {
     }
     try {
       const res = await axios.post(`${API_URL_USER}/login`, formdata, config);
-
       if (res?.data?.status === "success") {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -120,7 +118,6 @@ export const AuthContextProvider = ({ children }) => {
       //Redirect
       window.location.href = "/dashboard"
     } catch (error) {
-      console.log(error)
       dispatch({
         type: LOGIN_FAILED,
         payload: error?.response?.data?.message,
@@ -137,15 +134,10 @@ export const AuthContextProvider = ({ children }) => {
         Authorization: `Bearer ${state?.userAuth?.token}`
       }
     }
-
     try {
       const res = await axios.get(`${API_URL_USER}/profile`, config);
       dispatch({ type: FETCH_PROFILE_SUCCESS, payload: res.data })
-      console.log(res?.data);
-
-      console.log(`Bearer ${state?.userAuth?.token}`)
     } catch (error) {
-
       dispatch({
         type: "ERROR",
         payload: error?.response?.data?.message
@@ -167,7 +159,6 @@ export const AuthContextProvider = ({ children }) => {
         type: "ERROR",
         payload: error?.response?.data?.message
       })
-      console.log(error)
     }
   }
 

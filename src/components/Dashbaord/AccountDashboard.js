@@ -10,7 +10,7 @@ const AccountDashboard = () => {
   useEffect(() => {
     getProfile();
   }, []);
-
+  console.log(profile);
   return (
     <>
       {error ? (
@@ -26,7 +26,7 @@ const AccountDashboard = () => {
       ) : (
         <>
           <AccountSummary />
-          <AccountList accounts={profile?.accounts} />
+          <AccountList accounts={profile?.userData?.accounts} />
         </>
       )}
     </>

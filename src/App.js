@@ -9,6 +9,7 @@ import HomePage from './components/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
 import AccountSummary from './components/Dashbaord/AccountSummary';
 import AccountDashboard from './components/Dashbaord/AccountDashboard';
+import AccountDetails from './components/Dashbaord/AccountDetails';
 
 
 function App() {
@@ -16,12 +17,13 @@ function App() {
     <BrowserRouter>
       <Navbar/>
         <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/counter" element={<Counter />}></Route>
-            <Route path="/dashboard" element={<AccountDashboard />}></Route>
+            <Route path="/" element={<HomePage />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/profile" element={<Profile />}/>
+            <Route path="/counter" element={<Counter />}/>
+            <Route path="/dashboard" element={<AccountDashboard />}/>
+            <Route path="/account-details/:id" element={<AccountDetails />}/>
         </Routes>
     </BrowserRouter>
   );

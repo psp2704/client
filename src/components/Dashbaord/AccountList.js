@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const AccountList = ({ accounts }) => {
+  console.log(accounts)
   return (
     <>
       <section className="py-12 bg-white">

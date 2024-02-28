@@ -6,10 +6,9 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 
-
 export default function Navbar() {
   const { token, logoutUser } = useContext(AuthContext);
-  useEffect(()=>token,[])
+  // useEffect(()=>token,[])
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

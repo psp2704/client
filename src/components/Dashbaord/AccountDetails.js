@@ -1,15 +1,19 @@
-// import { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/20/solid";
 // import { accountContext } from "../context/AccountContext/AccountContext";
 import AllTransactions from "./AllTransactions";
+import { AccountContext } from "../context/AccountContext/AccountContext";
 
 export default function AccountDetails() {
   // const { getAccountDetailsAction, account } = useContext(accountContext);
-  // const { accountID } = useParams();
-  // useEffect(() => {
-  //   getAccountDetailsAction(accountID);
-  // }, [accountID]);
+  const {getSingleAccount, account} = useContext(AccountContext);
+  const { accountID } = useParams();
+
+  useEffect(() => {
+    getSingleAccount(accountID);
+  }, [accountID]);
+
   // console.log(account);
   //Calculate total income
   // const totalIncome = account?.transactions?.reduce((acc, transaction) => {
@@ -29,13 +33,13 @@ export default function AccountDetails() {
   //   }
   // }, 0);
 
-    const accountID = "";
-    const account = {
-      transaction : ''
-    }
+    // const accountID = "";
+    // const account = {
+    //   transaction : ''
+    // }
   return (
     <>
-      {/* {account?.transactions?.length <= 0 ? ( */}
+      {account?.transactions?.length <= 0 ? (
         <>
           <h2 className="text-center text-red-500 m-10">
             This Account Don't have any transaction
@@ -52,14 +56,13 @@ export default function AccountDetails() {
             </Link>
           </div>
         </>
-      {/* ) : ( */}
+       ) : ( 
         <>
           <div className="bg-gray-50 pt-12 sm:pt-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-4xl text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  {/* {account?.name} */}
-                  gg
+                  {account?.name}
                 </h2>
                 <p className="mt-3 text-xl text-gray-500 sm:mt-4">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -119,11 +122,11 @@ export default function AccountDetails() {
             </div>
           </div>
            <AllTransactions
-            transactions={account?.transactions}
+            transactions={account?.transactionData}
             accountID={accountID}
           /> 
         </>
-      {/* )} */}
+       )} 
     </>
   );
 }

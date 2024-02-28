@@ -10,7 +10,6 @@ const AccountDashboard = () => {
   useEffect(() => {
     getProfile();
   }, []);
-  console.log(profile);
   return (
     <>
       {error ? (

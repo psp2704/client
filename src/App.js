@@ -23,7 +23,7 @@ function App() {
             <Route path="/profile" element={<Profile />}/>
             <Route path="/counter" element={<Counter />}/>
             <Route path="/dashboard" element={<AccountDashboard />}/>
-            <Route path="/account-details/:id" element={<AccountDetails />}/>
+            <Route path="/account-details/:accountID" element={<AccountDetails />}/>
         </Routes>
     </BrowserRouter>
   );

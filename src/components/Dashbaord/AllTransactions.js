@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AllTransactions = ({ transactions, accountID }) => {
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8 ">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">
@@ -67,7 +67,7 @@ const AllTransactions = ({ transactions, accountID }) => {
                     {transactions?.map(transaction => {
                       return (
                         <tr
-                          key={transaction?.email}
+                          key={transaction?._id}
                           className={transaction?.color}
                         >
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">

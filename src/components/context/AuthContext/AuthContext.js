@@ -29,6 +29,7 @@ const reducer = (state, action) => {
   switch (type) {
     //Register
     case REGISTER_SUCCESS:
+      localStorage.setItem("userAuth", JSON.stringify(payload));
       return {
         ...state,
         loading: false,
@@ -100,6 +101,34 @@ const reducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+  //register action
+  const registerUser = async (formdata) =>{
+    const config =  {
+      headers : {
+        "Content-Type" : "application/json",
+      }
+    }
+    try {
+      const res = await axios.post(`${API_URL_USER}/register`, formdata, config);
+
+      if(res?.data?.status === 'success') {
+        dispatch({
+          type : REGISTER_SUCCESS,
+          payload : res.data,
+        })
+      };
+
+      //redirect to dashboard
+      window.location.href = "/dashboard"
+      console.log(res);
+    } catch (error) {
+      dispatch({
+        type : REGISTER_FAIL,
+        payload : error?.response?.data?.message,
+      })
+    }
+  }
+
   //login action
   const login = async (formdata) => {
     const config = {
@@ -163,7 +192,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ state, token: state?.userAuth?.token, profile:state?.profile, login, getProfile, error: state?.error, logoutUser }}>
+    <AuthContext.Provider value={{ state, token: state?.userAuth?.token, profile:state?.profile, login, getProfile, registerUser, error: state?.error, logoutUser }}>
       {children}
     </AuthContext.Provider>
   )

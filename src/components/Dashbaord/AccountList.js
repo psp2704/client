@@ -17,7 +17,7 @@ const AccountList = ({ accounts }) => {
                   to create one.
                 </p>
                 <a
-                  href="/dashboard/accounts/create"
+                  href="/create-account"
                   className="px-6 py-3 text-lg font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
                 >
                   Create Account
@@ -35,7 +35,7 @@ const AccountList = ({ accounts }) => {
                     category or in chronological order.
                   </p>
                   <Link
-                    to="/dashboard/accounts/create"
+                    to="/create-account"
                     className="inline-flex m-8 items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <svg
@@ -61,7 +61,7 @@ const AccountList = ({ accounts }) => {
                       <div className="flex items-center justify-between flex-wrap p-10 bg-coolGray-50 group-hover:bg-coolGray-100 rounded-md shadow-md transition duration-200">
                         <div className="w-full md:w-1/2 mb-2 md:mb-0">
                           <h3 className="text-lg md:text-xl text-coolGray-800 group-hover:text-coolGray-900 font-semibold">
-                            {acc?.name}
+                            {acc?.accountName}
                           </h3>
                         </div>
                         <Link to={`/account-details/${acc?._id}`}>

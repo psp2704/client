@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const AccountList = ({ accounts }) => {
   return (
     <>
-      <section className="py-12 bg-white">
+      <section className="py-12">
         <div className="container px-4 mx-auto">
           {/* Nt account msg */}
           <div className="max-w-3xl mx-auto">
@@ -57,7 +57,7 @@ const AccountList = ({ accounts }) => {
                 </div>
                 {accounts?.map((acc) => {
                   return (
-                    <div className="group block mb-6" key={acc?._id} href="#">
+                    <div className="group block mb-6 bg-white rounded-md" key={acc?._id} href="#">
                       <div className="flex items-center justify-between flex-wrap p-10 bg-coolGray-50 group-hover:bg-coolGray-100 rounded-md shadow-md transition duration-200">
                         <div className="w-full md:w-1/2 mb-2 md:mb-0">
                           <h3 className="text-lg md:text-xl text-coolGray-800 group-hover:text-coolGray-900 font-semibold">

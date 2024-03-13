@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const AllTransactions = ({ transactions, accountID }) => {
+  useEffect( ()=>{}, [transactions]);
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-100">
@@ -57,9 +58,9 @@ const AllTransactions = ({ transactions, accountID }) => {
                         </th>
                         <th
                           scope="col"
-                          className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          <span className="sr-only">Edit</span>
+                         Action
                         </th>
                       </tr>
                     </thead>
@@ -95,15 +96,17 @@ const AllTransactions = ({ transactions, accountID }) => {
                               {transaction?.notes}
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <a
+                              {/* <a
                                 href="#"
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
-                                Edit
+                                <span>Edit</span>
                                 <span className="sr-only">
                                   , {transaction?.name}
                                 </span>
-                              </a>
+                              </a> */}
+                              <button className="border-2 border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
+                              <button className="border-2 border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
                             </td>
                           </tr>
                         );

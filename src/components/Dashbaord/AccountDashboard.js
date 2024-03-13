@@ -24,8 +24,10 @@ const AccountDashboard = () => {
         </>
       ) : (
         <>
+        <div className="bg-gray-200">
           <AccountSummary />
           <AccountList accounts={profile?.userData?.accounts} />
+          </div>
         </>
       )}
     </>

@@ -5,25 +5,25 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-24 bg-black overflow-hidden">
         <div className="container px-4 mx-auto">
           <div className="md:max-w-4xl mb-16 md:mb-20">
             <span className="inline-block py-px px-2 mb-4 text-xs leading-5 text-green-500 bg-green-100 font-medium uppercase rounded-full shadow-sm">
               INCOME & EXPENSES TRACKER
             </span>
-            <h1 className="mb-4 text-3xl md:text-4xl leading-tight font-bold tracking-tighter">
+            <h1 className="mb-4 text-3xl md:text-4xl leading-tight font-bold tracking-tighter text-gray-50">
               Track Your Project Income and Expenses
             </h1>
-            <p className="text-lg md:text-xl text-coolGray-500 font-medium">
+            <p className="text-lg md:text-xl text-gray-200 font-medium">
               Manage your money more effectively and make better financial
               decisions with this easy-to-use software.
             </p>
           </div>
           <div className="flex flex-wrap lg:items-center -mx-4">
             <div className="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-              <div className="flex flex-wrap p-8 text-center md:text-left hover:bg-white rounded-md hover:shadow-xl transition duration-200">
+              <div className="flex flex-wrap p-8 text-center md:text-left rounded-md hover:shadow-xl transition duration-200">
                 <div className="w-full md:w-auto mb-6 md:mb-0 md:pr-6">
-                  <div className="inline-flex h-14 w-14 mx-auto items-center justify-center text-white bg-green-500 rounded-lg">
+                  <div className="inline-flex h-14 w-14 mx-auto mt-4 items-center justify-center text-white bg-green-500 rounded-lg">
                     <svg
                       width={21}
                       height={21}
@@ -39,18 +39,18 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div className="w-full md:flex-1 md:pt-3">
-                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-coolGray-900 font-bold">
+                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-white font-bold">
                     Understand Your Spending Patterns
                   </h3>
-                  <p className="text-coolGray-500 font-medium">
+                  <p className="text-gray-100 font-medium">
                     Stop wasting time logging expenses and tracking your income
                     by hand. Use our software to manage it all in one place.
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap p-8 text-center md:text-left hover:bg-white rounded-md hover:shadow-xl transition duration-200">
+              <div className="flex flex-wrap p-8 text-center md:text-left rounded-md hover:shadow-xl transition duration-200">
                 <div className="w-full md:w-auto mb-6 md:mb-0 md:pr-6">
-                  <div className="inline-flex h-14 w-14 mx-auto items-center justify-center text-white bg-green-500 rounded-lg">
+                  <div className="inline-flex h-14 w-14 mx-auto mt-4 items-center justify-center text-white bg-green-500 rounded-lg">
                     <svg
                       width={21}
                       height={21}
@@ -66,10 +66,10 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div className="w-full md:flex-1 md:pt-3">
-                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-coolGray-900 font-bold">
+                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-white font-bold">
                     Visualize Your Income and Expenses Over Time
                   </h3>
-                  <p className="text-coolGray-500 font-medium">
+                  <p className="text-gray-200 font-medium">
                     See where your money goes each month and how it changes over
                     time with this easy-to-use income and expenses tracker.
                   </p>
@@ -77,7 +77,7 @@ const HomePage = () => {
               </div>
               <div className="flex flex-wrap p-8 text-center md:text-left hover:bg-white rounded-md hover:shadow-xl transition duration-200">
                 <div className="w-full md:w-auto mb-6 md:mb-0 md:pr-6">
-                  <div className="inline-flex h-14 w-14 mx-auto items-center justify-center text-white bg-green-500 rounded-lg">
+                  <div className="inline-flex h-14 w-14 mx-auto mt-4 items-center justify-center text-white bg-green-500 rounded-lg">
                     <svg
                       width={21}
                       height={21}
@@ -93,10 +93,10 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div className="w-full md:flex-1 md:pt-3">
-                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-coolGray-900 font-bold">
+                  <h3 className="mb-4 text-xl md:text-2xl leading-tight text-white font-bold">
                     Stay on Top of Your Spending
                   </h3>
-                  <p className="text-coolGray-500 font-medium">
+                  <p className="text-gray-200 font-medium">
                     Take back control of your finances with our easy-to-use
                     budgeting tool. Get started for free.
                   </p>
@@ -124,7 +124,7 @@ const HomePage = () => {
             <h1 className="mb-4 text-3xl md:text-4xl leading-tight font-heading font-bold">
               Save Time and Money with the Income and Expenses Tracker
             </h1>
-            <p className="mb-6 text-lg md:text-xl text-coolGray-500 font-heading">
+            <p className="mb-6 text-lg md:text-xl text-gray-200 font-heading">
               Flex is a Small SaaS Business. Flex isn’t a traditional company.
               We believe a diverse team, approaches to work and transparency are
               key to our success.

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -6,7 +7,7 @@ const Header = () => {
       <section className="relative bg-white overflow-hidden">
         <div className="bg-tarnsparent">
           <div className="navbar-menu hidden fixed top-0 left-0 z-50 w-full h-full bg-coolGray-900 bg-opacity-50">
-            <div className="fixed top-0 left-0 bottom-0 w-full w-4/6 max-w-xs bg-white">
+            <div className="fixed top-0 left-0 bottom-0  w-4/6 max-w-xs bg-white">
               <a className="navbar-close absolute top-5 p-4 right-3" href="#">
                 <svg
                   width={12}
@@ -42,20 +43,20 @@ const Header = () => {
                 </p>
                 <div className="flex flex-wrap">
                   <div className="w-full md:w-auto py-1 md:py-0 md:mr-4">
-                    <a
+                    <Link
                       className="inline-block py-5 px-7 w-full text-base md:text-lg leading-4 text-green-50 font-medium text-center bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 border border-green-500 rounded-md shadow-sm"
-                      href="#"
+                      to="/login"
                     >
-                      Request a Demo
-                    </a>
+                      Login
+                    </Link>
                   </div>
                   <div className="w-full md:w-auto py-1 md:py-0">
-                    <a
+                    <Link
                       className="inline-block py-5 px-7 w-full text-base md:text-lg leading-4 text-coolGray-800 font-medium text-center bg-white hover:bg-coolGray-100 focus:ring-2 focus:ring-coolGray-200 focus:ring-opacity-50 border border-coolGray-200 rounded-md shadow-sm"
-                      href="#"
+                      to="/register"
                     >
-                      Sign Up
-                    </a>
+                      Register
+                    </Link>
                   </div>
                 </div>
               </div>

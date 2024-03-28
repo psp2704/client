@@ -124,7 +124,7 @@ const HomePage = () => {
             <h1 className="mb-4 text-3xl md:text-4xl leading-tight font-heading font-bold">
               Save Time and Money with the Income and Expenses Tracker
             </h1>
-            <p className="mb-6 text-lg md:text-xl text-gray-200 font-heading">
+            <p className="mb-6 text-lg md:text-xl text-gray-600 font-heading">
               Flex is a Small SaaS Business. Flex isn’t a traditional company.
               We believe a diverse team, approaches to work and transparency are
               key to our success.

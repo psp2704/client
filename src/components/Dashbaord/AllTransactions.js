@@ -34,31 +34,31 @@ const AllTransactions = ({ transactions, accountID }) => {
                       <tr>
                         <th
                           scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
                         >
                           Name
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                         >
                           Type
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                         >
                           Amount
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                         >
                           Note
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                         >
                          Action
                         </th>
@@ -72,30 +72,28 @@ const AllTransactions = ({ transactions, accountID }) => {
                             key={transaction?._id}
                             className={transaction?.color}
                           >
-                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                              <div className="flex items-center">
-                                <div className="ml-4">
+                            <td className="whitespace-nowrap text-center py-4 pl-4 pr-3 text-sm ">
+                      
                                   <div className="font-medium text-gray-900">
                                     {transaction?.name}
                                   </div>
-                                  {/* <div className="text-gray-500">Emma</div> */}
-                                </div>
-                              </div>
+                                  
+                         
                             </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
                               <div className="text-gray-900">
                                 {transaction?.transactionType}
                               </div>
                             </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
                               <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
                                 $ {transaction?.amount}
                               </span>
                             </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
                               {transaction?.notes}
                             </td>
-                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            <td className="relative w-1/5 whitespace-nowrap text-center py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
                               {/* <a
                                 href="#"
                                 className="text-indigo-600 hover:text-indigo-900"
@@ -105,8 +103,8 @@ const AllTransactions = ({ transactions, accountID }) => {
                                   , {transaction?.name}
                                 </span>
                               </a> */}
-                              <button className="border-2 border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
-                              <button className="border-2 border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
+                              <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
+                              <button className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
                             </td>
                           </tr>
                         );

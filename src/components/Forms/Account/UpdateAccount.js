@@ -3,26 +3,28 @@ import { AccountContext } from '../../context/AccountContext/AccountContext';
 
 function CreateAccount() {
 
-  const { state, createAccount } = useContext(AccountContext)
+  const { state, getAccount } = useContext(AccountContext)
 
-  const [formdata, setFormdata] = useState({
-    accountName: "",
-    initialBalance: "",
-    notes: ""
-  });
+  // const [formdata, setFormdata] = useState({
+  //   accountName: "",
+  //   initialBalance: "",
+  //   notes: ""
+  // });
 
-  const { accountName, initialBalance, notes } = formdata;
+  // const { accountName, initialBalance, notes } = formdata;
 
-  const onChangeInput = (e) => {
-    console.log(e.target.name, e.target.value);
-    return setFormdata({ ...formdata, [e.target.name]: e.target.value });
-  }
+  // const onChangeInput = (e) => {
+  //   console.log(e.target.name, e.target.value);
+  //   return setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  // }
 
-  //handle the submit form 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createAccount(formdata);
-  }
+  // //handle the submit form 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   getAccount(formdata);
+  // }
+
+  
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

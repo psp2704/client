@@ -40,6 +40,16 @@ const accountReducer = (state, action) => {
                 loading: false
             }
         }
+
+        case "ACCOUNT_DELETED_SUCCESS": {
+            return {
+                ...state,
+                account: payload,
+                accounts: [],
+                transactions: payload?.transactionData,
+                loading: false
+            }
+        }
         default: {
             return state;
         }
@@ -57,7 +67,7 @@ export const AccountContextProvider = ({ children }) => {
     }
 
     // create account actions
-    const getAccount = async (formdata) => {
+    const createAccount = async (formdata) => {
         try {
             const res = await axios.post(`${ACCOUNT_URL}`, formdata, config);
             if (res?.data?.account?.status === 'success') {
@@ -96,8 +106,52 @@ export const AccountContextProvider = ({ children }) => {
             })
         }
     }
+
+    // delete account
+    const deleteAccount = async (id) => {
+        const res = await axios.delete(`${ACCOUNT_URL}/${id}`, config);
+        try {
+            if (res?.data?.status === "success") {
+                dispatch({
+                    type: "ACCOUNT_DELETED_SUCCESS",
+                    payload: res?.data?.account
+                })
+            }
+
+            //redirect to dashboard
+            window.location.href = "/dashboard"
+
+        } catch (error) {
+            dispatch({
+                type: "FETCH_ACCOUNT_FAIL",
+                payload: error.message
+            })
+        };
+    }
+
+    //Account Update
+    const updateAccount = async (formdata) => {
+        const res = axios.put(ACCOUNT_URL, formdata, config);
+        try {
+            if (res?.data?.status === "success") {
+                dispatch({
+                    type: "ACCOUNT_UPDATED_SUCCESSFULLY",
+                    payload: res?.data?.account
+                });
+
+                //redirect to dashboard
+                window.location.href = "/dashboard"
+            }
+        } catch (error) {
+            dispatch({
+                type: "FETCH_ACCOUNT_FAIL",
+                payload: error.message
+            })
+        }
+    }
+
     return (
-        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, getAccount }}>
+        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, createAccount, deleteAccount }}>
             {children}
         </AccountContext.Provider>
     )

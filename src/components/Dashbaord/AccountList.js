@@ -1,6 +1,18 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AccountContext } from "../context/AccountContext/AccountContext";
 
 const AccountList = ({ accounts }) => {
+
+  const { deleteAccount } = useContext(AccountContext);
+
+  const handleDeleteClick = (id) => {
+    if (window.confirm("Are you sure? This can not be undone.")) {
+      deleteAccount(id);
+      alert("Account Deleleted Successfully");
+    }
+  };
+
   return (
     <>
       <section className="py-12">
@@ -83,6 +95,10 @@ const AccountList = ({ accounts }) => {
                             </div>
                           </div>
                         </Link>
+                        <div>
+                          <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
+                          <button onClick={()=> handleDeleteClick(`${acc?._id}`)} className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
+                        </div>
                       </div>
                     </div>
                   );

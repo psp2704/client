@@ -50,6 +50,17 @@ const accountReducer = (state, action) => {
                 loading: false
             }
         }
+
+        case "ACCOUNT_UPDATED_SUCCESS": {
+            return {
+                ...state,
+                account: payload,
+                accounts: [],
+                transactions: payload?.transactionData,
+                loading: false
+            }
+        }
+
         default: {
             return state;
         }
@@ -87,6 +98,27 @@ export const AccountContextProvider = ({ children }) => {
             })
         }
     }
+
+        //Account Update
+        const updateAccount = async (formdata, id) => {
+            const res = await axios.put(`${ACCOUNT_URL}/${id}`, formdata, config);
+            try {
+                if (res?.data?.status === "success") {
+                    dispatch({
+                        type: "ACCOUNT_UPDATED_SUCCESS",
+                        payload: res?.data?.account
+                    });
+    
+                    //redirect to dashboard
+                    window.location.href = "/dashboard"
+                }
+            } catch (error) {
+                dispatch({
+                    type: "FETCH_ACCOUNT_FAIL",
+                    payload: error.message
+                })
+            }
+        }
 
     //fetch singel account 
     const getSingleAccount = async (id) => {
@@ -129,29 +161,10 @@ export const AccountContextProvider = ({ children }) => {
         };
     }
 
-    //Account Update
-    const updateAccount = async (formdata) => {
-        const res = axios.put(ACCOUNT_URL, formdata, config);
-        try {
-            if (res?.data?.status === "success") {
-                dispatch({
-                    type: "ACCOUNT_UPDATED_SUCCESSFULLY",
-                    payload: res?.data?.account
-                });
 
-                //redirect to dashboard
-                window.location.href = "/dashboard"
-            }
-        } catch (error) {
-            dispatch({
-                type: "FETCH_ACCOUNT_FAIL",
-                payload: error.message
-            })
-        }
-    }
 
     return (
-        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, createAccount, deleteAccount }}>
+        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, createAccount, deleteAccount, updateAccount }}>
             {children}
         </AccountContext.Provider>
     )

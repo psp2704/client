@@ -9,6 +9,7 @@ import Profile from './components/Profile/Profile';
 import AccountDashboard from './components/Dashbaord/AccountDashboard';
 import AccountDetails from './components/Dashbaord/AccountDetails';
 import CreateAccount from './components/Forms/Account/CreateAccount';
+import UpdateAccount from './components/Forms/Account/UpdateAccount';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/dashboard" element={<AccountDashboard />}/>
             <Route path="/account-details/:accountID" element={<AccountDetails />}/>
             <Route path="/create-account" element={<CreateAccount />}/>
+            <Route path="/update-account/:accountID" element={<UpdateAccount />}/>
         </Routes>
     </BrowserRouter>
   );

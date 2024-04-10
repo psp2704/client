@@ -14,7 +14,7 @@ export default function AccountDetails() {
     getSingleAccount(accountID);
   }, [accountID]);
 
-  // console.log(account);
+ 
   //Calculate total income
   // const totalIncome = account?.transactions?.reduce((acc, transaction) => {
   //   if (transaction?.transactionType === "Income") {

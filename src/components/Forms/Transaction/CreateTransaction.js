@@ -21,7 +21,7 @@ function CreateAccount() {
   const { state, createAccount } = useContext(AccountContext);
 
   const [formdata, setFormdata] = useState({
-    trasactionName: "",
+    transactionName: "",
     transactionType : "",
     amount: "",
     category : "",
@@ -29,7 +29,7 @@ function CreateAccount() {
    
   });
 
-  const { trasactionName, transactionType, amount, cagtegory, notes, } = formdata;
+  const { transactionName, transactionType, amount, cagtegory, notes, } = formdata;
 
   const onChangeInput = (e) => {
     console.log(e.target.name, e.target.value);

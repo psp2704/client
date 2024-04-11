@@ -1,8 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { TransactionContext } from "../context/TransactionContext/TransactionContext";
 
-const AllTransactions = ({ transactions, accountID }) => {
-  useEffect( ()=>{}, [transactions]);
+const AllTransactions = ({ account, transactions, accountID }) => {
+  const {deleteTransaction} = useContext(TransactionContext);
+
+  const handleDelete = (id) =>{
+    if (window.confirm("Are you sure? This can not be undone.")) {
+      deleteTransaction(id);
+      alert("Account Deleleted Successfully");
+    }
+  }
+
+  useEffect( ()=>{}, [account]);
+  
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-100">
@@ -104,7 +115,7 @@ const AllTransactions = ({ transactions, accountID }) => {
                                 </span>
                               </a> */}
                               <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
-                              <button className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
+                              <button onClick={()=>handleDelete(transaction?._id)} className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
                             </td>
                           </tr>
                         );

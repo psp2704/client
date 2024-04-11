@@ -8,13 +8,13 @@ import { AccountContext } from "../context/AccountContext/AccountContext";
 export default function AccountDetails() {
   // const { getAccountDetailsAction, account } = useContext(accountContext);
   const {getSingleAccount, account} = useContext(AccountContext);
+ 
   const { accountID } = useParams();
 
   useEffect(() => {
     getSingleAccount(accountID);
   }, [accountID]);
 
- 
   //Calculate total income
   // const totalIncome = account?.transactions?.reduce((acc, transaction) => {
   //   if (transaction?.transactionType === "Income") {
@@ -122,6 +122,7 @@ export default function AccountDetails() {
             </div>
           </div>
            <AllTransactions
+           account= {account}
             transactions={account?.transactionData}
             accountID={accountID}
           /> 

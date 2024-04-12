@@ -27,12 +27,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
             }
-        case  "FAILED_ERROR" :
-            return  {
+        case "FAILED_ERROR":
+            return {
                 ...state,
-                error : payload
+                error: payload
             }
-            
+
         default:
             return state;
     }
@@ -52,11 +52,13 @@ export const TransactionProvider = ({ children }) => {
 
         try {
             if (res?.data?.status === 'success') {
-            //     dispatch({
-            //         type:
-            // })
-            console.log(res.data)
+                //     dispatch({
+                //         type:
+                // })
             }
+            //redirect to dashboard
+            window.location.href = "/dashboard"
+
         } catch (error) {
             dispatch({
                 type: 'FAILED_ERROR',

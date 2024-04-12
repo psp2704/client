@@ -60,7 +60,6 @@ const accountReducer = (state, action) => {
                 loading: false
             }
         }
-
         default: {
             return state;
         }
@@ -78,7 +77,8 @@ export const AccountContextProvider = ({ children }) => {
     }
 
     // create account actions
-    const createAccount = async (formdata) => {
+    const CreateAccount = async (formdata) => {
+
         try {
             const res = await axios.post(`${ACCOUNT_URL}`, formdata, config);
             if (res?.data?.account?.status === 'success') {
@@ -87,7 +87,7 @@ export const AccountContextProvider = ({ children }) => {
                     payload: res?.data?.account
                 })
             }
-
+           
             //redirect to dashboard
             window.location.href = "/dashboard"
 
@@ -161,10 +161,8 @@ export const AccountContextProvider = ({ children }) => {
         };
     }
 
-
-
     return (
-        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, createAccount, deleteAccount, updateAccount }}>
+        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, CreateAccount, deleteAccount, updateAccount }}>
             {children}
         </AccountContext.Provider>
     )

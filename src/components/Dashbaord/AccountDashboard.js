@@ -4,11 +4,11 @@ import AccountList from "./AccountList";
 import AccountSummary from "./AccountSummary";
 
 const AccountDashboard = () => {
-  const { getProfile, profile, error } = useContext(AuthContext);
+  const { GetProfile, profile, error } = useContext(AuthContext);
 
   //dispatch action
   useEffect(() => {
-    getProfile();
+    GetProfile();
   }, []);
   return (
     <>

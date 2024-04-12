@@ -8,8 +8,9 @@ import HomePage from './components/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
 import AccountDashboard from './components/Dashbaord/AccountDashboard';
 import AccountDetails from './components/Dashbaord/AccountDetails';
-import CreateAccount from './components/Forms/Account/CreateAccount';
+import CreateAccountForm from './components/Forms/Account/CreateAccountForm';
 import UpdateAccount from './components/Forms/Account/UpdateAccount';
+import CreateTransaction from './components/Forms/Transaction/CreateTransaction';
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
             <Route path="/counter" element={<Counter />}/>
             <Route path="/dashboard" element={<AccountDashboard />}/>
             <Route path="/account-details/:accountID" element={<AccountDetails />}/>
-            <Route path="/create-account" element={<CreateAccount />}/>
+            <Route path="/create-account" element={<CreateAccountForm />}/>
             <Route path="/update-account/:accountID" element={<UpdateAccount />}/>
+            <Route path="/create-transaction" element={<CreateTransaction/>}/>
         </Routes>
     </BrowserRouter>
   );

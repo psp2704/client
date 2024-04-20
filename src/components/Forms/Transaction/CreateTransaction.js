@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { AccountContext } from '../../context/AccountContext/AccountContext';
+import { TransactionContext } from '../../context/TransactionContext/TransactionContext';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function CreateTransaction() {
+
+  const { accountID } = useParams();
+
+  const navigate = useNavigate(accountID);
 
   const transactionTypes = ["Income", "Expense"];
 
@@ -18,18 +23,18 @@ function CreateTransaction() {
     'Groceries',
   ];
 
-  const { state, createAccount } = useContext(AccountContext);
+  const { state, createTransaction } = useContext(TransactionContext);
 
   const [formdata, setFormdata] = useState({
-    transactionName: "",
+    name: "",
     transactionType : "",
     amount: "",
     category : "",
     notes: "",
-   
+    account : accountID
   });
 
-  const { transactionName, transactionType, amount, category, notes, } = formdata;
+  const { name, transactionType, amount, category, notes, } = formdata;
 
   const onChangeInput = (e) => {
     console.log(e.target.name, e.target.value);
@@ -37,9 +42,14 @@ function CreateTransaction() {
   }
 
   //handle the submit form 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createAccount(formdata);
+    try {
+      await  createTransaction(formdata,  accountID);
+      navigate(`/account-details/${accountID}`)
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   return (
@@ -55,8 +65,8 @@ function CreateTransaction() {
                   )}
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="trasactionName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Name</label>
-                <input onChange={onChangeInput} value={transactionName} type="text" name="trasactionName" id="trasactionName" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Name</label>
+                <input onChange={onChangeInput} value={name} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
               </div>
               <div>
                 <label
@@ -87,7 +97,7 @@ function CreateTransaction() {
               </div>
               <div>
                 <label
-                  htmlFor="transactionType"
+                  htmlFor="category"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Transaction Type
@@ -95,8 +105,8 @@ function CreateTransaction() {
                 <select
                   onChange={onChangeInput}
                   value={category}
-                  name="transactionType"
-                  id="transactionType"
+                  name="category"
+                  id="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required
                 >

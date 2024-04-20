@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import axios from 'axios';
 import { TRANSACTION_URL } from "../../../utils/apiUrls";
+import { redirect } from "react-router-dom";
 
 export const TransactionContext = createContext();
 
@@ -8,30 +9,49 @@ const INITIAL_STATE = {
     userAuth: JSON.parse(localStorage.getItem("userAuth")),
     transactions: [],
     error: null,
-    loading: null,
+    loading: false,
 }
 
 const reducer = (state, action) => {
     const { type, payload } = action;
     switch (type) {
-        case "TRANSACTION_CREATED_SUCCESS":
+        case "FETCH_TRANSACTIONS_SUCCESS":
             return {
-                ...state, ...payload.transaction
+                ...state,
+                transactions: payload,
+                loading: false,
+                error: null
             };
 
-        case "TRANSACTION_UPDATED_SUCCESS":
+        case "FETCH_TRANSACTIONS_FAIL":
             return {
                 ...state,
+                error: payload,
+                loading: false
             }
-        case "TRANSACTION_UPDATED_SUCCESS":
+
+        case "TRANSACTION_CREATED_SUCCESS":
             return {
                 ...state,
-            }
+                transactions: [...state.transactions, payload],
+                loading: false,
+                error: null
+            };
+
+        case "TRANSACTION_DELETED_SUCCESS":
+            return {
+                ...state,
+                transactions: state.transactions.filter(transaction => transaction.id !== payload),
+                loading: false,
+                error: null
+            };
+
         case "FAILED_ERROR":
             return {
                 ...state,
-                error: payload
-            }
+                error: payload,
+                loading: false
+            };
 
         default:
             return state;
@@ -43,32 +63,62 @@ export const TransactionProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     const config = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${state?.userAuth?.token}`
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${state?.userAuth?.token}`
+        }
     }
 
-    const deleteTransaction = async (id) => {
-        const res = await axios.delete(`${TRANSACTION_URL}/${id}`, config);
-
+    const fetchTransactions = async () => {
         try {
-            if (res?.data?.status === 'success') {
-                //     dispatch({
-                //         type:
-                // })
-            }
-            //redirect to dashboard
-            window.location.href = "/dashboard"
+            const res = await axios.get(TRANSACTION_URL, config);
+            dispatch({
+                type: 'FETCH_TRANSACTIONS_SUCCESS',
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: 'FETCH_TRANSACTIONS_FAIL',
+                payload: error?.response?.data?.message
+            });
+        }
+    }
 
+    const createTransaction = async (formData, accountID) => {
+        try {
+            const res = await axios.post(TRANSACTION_URL, formData, config);
+            dispatch({
+                type: 'TRANSACTION_CREATED_SUCCESS',
+                payload: res.data
+            });
+
+        //    window.location.href = `/dashboard/${accountID}`
+        
         } catch (error) {
             dispatch({
                 type: 'FAILED_ERROR',
                 payload: error?.response?.data?.message
-            })
+            });
+        }
+    }
+
+    const deleteTransaction = async (id) => {
+        try {
+            const res = await axios.delete(`${TRANSACTION_URL}/${id}`, config);
+            dispatch({
+                type: 'TRANSACTION_DELETED_SUCCESS',
+                payload: id
+            });
+        } catch (error) {
+            dispatch({
+                type: 'FAILED_ERROR',
+                payload: error?.response?.data?.message
+            });
         }
     }
 
     return (
-        <TransactionContext.Provider value={{ deleteTransaction }} >
+        <TransactionContext.Provider value={{ state, fetchTransactions, createTransaction, deleteTransaction }} >
             {children}
         </TransactionContext.Provider>
     )

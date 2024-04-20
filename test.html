@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="multiply(10,4)">Multiply</button>
+    <button onclick="divide(10,4)">Divide</button>
+    <script>
+      // const leapYear = (year) => {
+      //     if(year % 4 === 0) {
+      //         return "Leap Year"
+      //     }else {
+      //         return "Not a leap year"
+      //     }
+      // }
+
+      // console.log(leapYear(2632));
+
+      // for (let i = 2014; i <= 2050; i++){
+      //     let date = new Date(i,0,1);
+
+      //     if(date.getDay() == 0){
+      //         console.log("1st Jamuary is being a sunday in " +i+ " year")
+      //     }
+      // }
+
+    //   let val = Math.floor(Math.random() * (10 + 1));
+    //   console.log(val);
+    //   let guess;
+
+    //   //    guess = window.prompt("Enter a value");
+    //   //    console.log(guess)
+    //   while (guess !== val) {
+    //     guess = window.prompt("Enter a value");
+    //     console.log(guess);
+    //     // alert ("wrong")
+    //   }
+
+    //   alert("Well Done");
+
+    //   let val = Math.floor(Math.random() * (10 + 1));
+    //   console.log("Random number:", val);
+
+    //   let guess;
+
+    //   while (Number(guess) !== val) {
+    //     guess = window.prompt("Enter a value between 0 and 10:");
+    //     console.log("User's guess:", typeof(guess));
+    //   }
+
+    //   alert("Well Done! You guessed the correct number.");
+
+    // let chirstmas = new Date (2024, 11, 25);
+    // let today = new Date();
+
+    // let timeDiff = Math.abs(chirstmas - today);
+    // let daysLeft = Math.ceil(timeDiff /(1000*3600*24));
+
+    // console.log(daysLeft +" Days left for Christmas!");
+        // const multiply = (a,b) =>{
+        //     console.log(a*b)
+        // }
+
+        // const divide = (a,b) =>{
+        //     console.log(a/b)
+        // }
+
+        // const fahernhit = (a) =>{
+        //     console.log((9/5) * a + 32 + " F")
+        // }
+
+        // const celsius = (b) =>{
+        //     console.log((b-32)*5/9 + " C");
+        // }
+
+        // fahernhit(60);
+        // celsius(45)
+
+        // const newVar = (a) =>{
+        //     return  `The variable ${a} has been declared.`
+        // }
+
+        // console.log(newVar("DATA"))
+
+        // const getExt = (a) =>{
+          
+        //     for (let i=0;i<a.length;i++){
+        //         if  (a[i].includes('.')){
+                    
+        //             return a.slice (i+1)
+        //         }
+        //     }
+        // }
+
+        
+        // console.log(getExt("data.pdf"))
+
+        const diff  = (a)  => {
+           
+            if(a>= 13) {
+                return `${a- 13}`
+            } else if (a < 13){
+                return Math.abs(`${13 - a}`) * 2
+                
+            }else {
+                return "56"
+            }
+        }
+            console.log(diff(2))
+    </script>
+  </body>
+</html>

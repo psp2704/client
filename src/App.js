@@ -26,7 +26,7 @@ function App() {
             <Route path="/account-details/:accountID" element={<AccountDetails />}/>
             <Route path="/create-account" element={<CreateAccountForm />}/>
             <Route path="/update-account/:accountID" element={<UpdateAccount />}/>
-            <Route path="/create-transaction" element={<CreateTransaction/>}/>
+            <Route path="/create-transaction/:accountID" element={<CreateTransaction/>}/>
         </Routes>
     </BrowserRouter>
   );

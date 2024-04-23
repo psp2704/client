@@ -1,22 +1,39 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext/TransactionContext";
+import { AccountContext } from "../context/AccountContext/AccountContext";
 
-const AllTransactions = ({ account, transactions, accountID }) => {
-  const { deleteTransaction } = useContext(TransactionContext);
-  const [updatedTransactions, setUpdatedTransactions] = useState([]);
+const AllTransactions = ({ accountID, response, transactions}) => {
+  const { deleteTransaction} = useContext(TransactionContext);
+  // const {state} = useContext(AccountContext)
+  // const [updatedTransactions, setUpdatedTransactions] = useState([...state.transactions]);
 
-  const handleDelete = async (id) => {
-    // if (window.confirm("Are you sure? This cannot be undone.")) {
+  // const handleDelete = async (id) => {
+  //   // if (window.confirm("Are you sure? This cannot be undone.")) {
+  //     await deleteTransaction(id);
+  //     // setUpdatedTransactions(transactions.filter((t) => t._id !== id));
+  //     setUpdatedTransactions([...state.transactions])
+  //     // alert("Transaction Deleted Successfully");
+  //   // }
+  // };
+
+  // console.log(state.transactions, updatedTransactions)
+
+  // useEffect(() => {
+  //   setUpdatedTransactions(updatedTransactions);
+  // }, [updatedTransactions]);
+
+
+  const handleDelete = async (id) =>{
+     if (window.confirm("Are you sure? This cannot be undone.")) {
       await deleteTransaction(id);
-      setUpdatedTransactions(transactions.filter((t) => t._id !== id));
+      // setUpdatedTransactions(transactions.filter((t) => t._id !== id));
+      // setUpdatedTransactions([...state.transactions])
       // alert("Transaction Deleted Successfully");
-    // }
-  };
+       await response(accountID);
+     }
 
-  useEffect(() => {
-    setUpdatedTransactions(transactions);
-  }, [transactions]);
+  }
 
   return (
     <>
@@ -39,7 +56,7 @@ const AllTransactions = ({ account, transactions, accountID }) => {
             </Link>
           </div>
         </div>
-        {updatedTransactions?.length !== 0 ? (
+        {transactions?.length !== 0 ? (
           <div className="mt-8 flex flex-col">
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -80,7 +97,7 @@ const AllTransactions = ({ account, transactions, accountID }) => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {updatedTransactions?.map((transaction) => (
+                      {transactions?.map((transaction) => (
                         <tr
                           key={transaction?._id}
                           className={transaction?.color}

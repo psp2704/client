@@ -15,6 +15,12 @@ export default function AccountDetails() {
     getSingleAccount(accountID);
   }, [accountID]);
 
+  const handleResponse = (accountID) =>{
+    getSingleAccount(accountID);
+  }
+
+  console.log(account?.transactionData, account)
+
   //Calculate total income
   // const totalIncome = account?.transactions?.reduce((acc, transaction) => {
   //   if (transaction?.transactionType === "Income") {
@@ -37,6 +43,7 @@ export default function AccountDetails() {
     // const account = {
     //   transaction : ''
     // }
+
   return (
     <>
       {account?.transactions?.length <= 0 ? (
@@ -122,9 +129,9 @@ export default function AccountDetails() {
             </div>
           </div>
            <AllTransactions
-           account= {account}
-            transactions={account?.transactionData}
+            transactions = {account?.transactionData}
             accountID={accountID}
+            response = {handleResponse}
           /> 
         </>
        )} 

@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { AccountContext } from '../../context/AccountContext/AccountContext';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccountForm() {
+
+  const navigate = useNavigate();
 
   const accountTypes = [
     'Saving',
@@ -16,7 +19,7 @@ function CreateAccountForm() {
     'Groceries',
   ];
 
-  const { state, CreateAccount } = useContext(AccountContext);
+  const { state, createAccount } = useContext(AccountContext);
   const [formdata, setFormdata] = useState({
     accountName: "",
     initialBalance: "",
@@ -32,9 +35,14 @@ function CreateAccountForm() {
   }
 
   //handle the submit form 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    CreateAccount(formdata);
+    try {
+      await createAccount(formdata);
+      navigate(`/dashboard`);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   return (

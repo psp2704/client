@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { AccountContext } from '../../context/AccountContext/AccountContext';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccount() {
+
+  const navigate = useNavigate();
 
   const accountTypes = [
     'Saving',
@@ -33,9 +36,14 @@ function CreateAccount() {
   }
 
   //handle the submit form 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createAccount(formdata);
+    try {
+      await createAccount(formdata);
+      navigate(`/dashboard`);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   return (

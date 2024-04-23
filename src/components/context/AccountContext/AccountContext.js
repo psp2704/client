@@ -77,7 +77,7 @@ export const AccountContextProvider = ({ children }) => {
     }
 
     // create account actions
-    const CreateAccount = async (formdata) => {
+    const createAccount = async (formdata) => {
 
         try {
             const res = await axios.post(`${ACCOUNT_URL}`, formdata, config);
@@ -89,7 +89,7 @@ export const AccountContextProvider = ({ children }) => {
             }
            
             //redirect to dashboard
-            window.location.href = "/dashboard"
+            // window.location.href = "/dashboard"
 
         } catch (error) {
             dispatch({
@@ -162,7 +162,7 @@ export const AccountContextProvider = ({ children }) => {
     }
 
     return (
-        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, CreateAccount, deleteAccount, updateAccount }}>
+        <AccountContext.Provider value={{ state, account: state?.account, getSingleAccount, createAccount, deleteAccount, updateAccount }}>
             {children}
         </AccountContext.Provider>
     )

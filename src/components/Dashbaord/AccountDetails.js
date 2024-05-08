@@ -19,25 +19,44 @@ export default function AccountDetails() {
     getSingleAccount(accountID);
   }
 
-  console.log(account?.transactionData, account)
+  // console.log(account?.transactionData, account)
 
   //Calculate total income
-  // const totalIncome = account?.transactions?.reduce((acc, transaction) => {
-  //   if (transaction?.transactionType === "Income") {
-  //     return acc + transaction?.amount;
-  //   } else {
-  //     return acc;
-  //   }
-  // }, 0);
+  const totalIncome = account?.transactionData?.reduce((acc, transaction) => {
+    // Check if the transaction type is "Income"
+    if (transaction?.transactionType === 'Income') {
+      // If it's an income transaction, add its amount to the accumulator
+      return acc + transaction?.amount;
+    } else {
+      // Otherwise, return the accumulator unchanged
+      return acc;
+    }
+  }, 0);
+
+  // console.log(Number(account?.transactionData?.map(t => t.amount)))
+
 
   // //Calculate total Expenses
   // const totalExpenses = account?.transactions?.reduce((acc, transaction) => {
-  //   if (transaction?.transactionType === "Expenses") {
+  //   if (transaction?.transactionType === "Expense") {
   //     return acc + transaction?.amount;
   //   } else {
   //     return acc;
   //   }
   // }, 0);
+
+  const totalExpenses = account?.transactionData?.reduce((acc, transaction) => {
+    // Check if the transaction type is "Income"
+    if (transaction?.transactionType === 'Expense') {
+      // If it's an income transaction, add its amount to the accumulator
+      return acc + transaction?.amount;
+    } else {
+      // Otherwise, return the accumulator unchanged
+      return acc;
+    }
+  }, 0);
+
+  console.log(totalExpenses)
 
     // const accountID = "";
     // const account = {
@@ -88,10 +107,10 @@ export default function AccountDetails() {
                           Total Balance
                         </dt>
                         <dd className=" text-5xl font-bold tracking-tight text-indigo-600">
-                          {/* ${" "}
+                          ${" "}
                           {totalIncome +
                             account?.initialBalance -
-                            totalExpenses} */}454
+                            totalExpenses}
                         </dd>
                       </div>
                       <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -99,7 +118,7 @@ export default function AccountDetails() {
                           Total Expenses
                         </dt>
                         <dd className=" text-5xl font-bold tracking-tight text-red-600">
-                          {/* $ {totalExpenses} */}4545
+                          $ {totalExpenses}
                         </dd>
                         <Link
                           to={`/expenses-list/${3}`}
@@ -113,7 +132,7 @@ export default function AccountDetails() {
                           Total Income
                         </dt>
                         <dd className=" text-5xl font-bold tracking-tight text-green-600">
-                          {/* ${totalIncome + account?.initialBalance} */}45454
+                          $ {totalIncome + account?.initialBalance}
                         </dd>
                         <Link
                           to={`/income-list/`}

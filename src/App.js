@@ -11,6 +11,7 @@ import AccountDetails from './components/Dashbaord/AccountDetails';
 import CreateAccountForm from './components/Forms/Account/CreateAccountForm';
 import UpdateAccount from './components/Forms/Account/UpdateAccount';
 import CreateTransaction from './components/Forms/Transaction/CreateTransaction';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -27,7 +28,9 @@ function App() {
             <Route path="/create-account" element={<CreateAccountForm />}/>
             <Route path="/update-account/:accountID" element={<UpdateAccount />}/>
             <Route path="/create-transaction/:accountID" element={<CreateTransaction/>}/>
+            <Route path="/update-transaction/:transactID" element={< UpdateTransaction/>}/>
         </Routes>
+        <Footer/>
     </BrowserRouter>
   );
 }

@@ -1,22 +1,24 @@
 import React, { useContext, useEffect, useState, } from 'react'
-import { AccountContext } from '../../context/AccountContext/AccountContext';
 import { useParams } from 'react-router-dom'
+import { TransactionContext } from '../../context/TransactionContext/TransactionContext';
 
-function UpdateAccount() {
+function UpdateTransaction() {
 
-  const { state, account, getSingleAccount , updateAccount } = useContext(AccountContext);
+  const { state,  fetchTransaction , updateTransaction } = useContext(TransactionContext);
 
-  const { accountID } = useParams();
+  const { ID } = useParams();
 
   useEffect(() => {
-    getSingleAccount(accountID);
-  }, [accountID]);
+    fetchTransaction(ID);
+  }, [ID]);
 
   const [formdata, setFormdata] = useState({
-    accountName: '',
-    initialBalance: '',
-    notes: '',
-    accountType: '', // Add accountType to form data state
+    name: "",
+    transactionType : "",
+    amount: "",
+    category : "",
+    notes: "",
+    account : accountID
   });
 
   const accountTypes = [
@@ -34,12 +36,14 @@ function UpdateAccount() {
 
   // Update formdata whenever state changes
   useEffect(() => {
-    if (state && state.account) {
+    if (state && state.transaction) {
       setFormdata({
-        accountName: state.account.accountName || "",
-        initialBalance: state.account.initialBalance || "",
-        notes: state.account.notes || "",
-        accountType: state.account.accountType || ""
+        name: state.transaction.name || "",
+        transactionType: state.transaction.transactionType || "",
+        amount: state.transaction.amount || "",
+        category: state.transaction.category || "",
+        notes: state.transaction.notes || "",
+        id: state.transaction.id || ""
       });
     }
   }, [state]);
@@ -52,46 +56,44 @@ function UpdateAccount() {
   //handle the submit form 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateAccount(formdata, accountID);
+    updateTransaction(formdata, accountID);
   }
 
   console.log(account, typeof(accountID));
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col my-24  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
-              Create Account
+              Create Transaction
             </h1>
             {state?.error && (
-              <p className="text-red-500 text-center">{state?.error}</p>
-            )}
-            <form className="space-y-4 md:space-y-6"
-             onSubmit={handleSubmit}
-            >
+                    <p className="text-red-500 text-center">{state?.error}</p>
+                  )}
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="accountName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Name</label>
-                <input onChange={onChangeInput} value={formdata.accountName} type="text" name="accountName" id="accountName" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Name</label>
+                <input onChange={onChangeInput} value={name} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
               </div>
               <div>
                 <label
-                  htmlFor="accountType"
+                  htmlFor="transactionType"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Account Type
+                  Transaction Type
                 </label>
                 <select
                   onChange={onChangeInput}
-                  value={formdata.accountType}
-                  name="accountType"
-                  id="accountType"
+                  value={transactionType}
+                  name="transactionType"
+                  id="transactionType"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required
                 >
-                  <option value="">Select Account Type</option>
-                  {accountTypes.map((type, index) => (
+                  <option value="">Select Transaction Type</option>
+                  {transactionTypes.map((type, index) => (
                     <option key={index} value={type}>
                       {type}
                     </option>
@@ -99,14 +101,37 @@ function UpdateAccount() {
                 </select>
               </div>
               <div>
-                <label htmlFor="initialBalance" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Initial Balance</label>
-                <input onChange={onChangeInput} value={formdata.initialBalance} type="number" name="initialBalance" id="initialBalance" placeholder="0000" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                <input onChange={onChangeInput} value={amount} type="number" name="amount" id="initialBalance" placeholder="0000" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+              </div>
+              <div>
+                <label
+                  htmlFor="category"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Transaction Type
+                </label>
+                <select
+                  onChange={onChangeInput}
+                  value={category}
+                  name="category"
+                  id="category"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                  required
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
-                <input onChange={onChangeInput} value={formdata.notes} type="text" name="notes" id="notes" placeholder="#travel..." className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <input onChange={onChangeInput} value={notes} type="text" name="notes" id="notes" placeholder="#travel..." className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
               </div>
-              <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Account</button>
+              <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create Transaction</button>
             </form>
           </div>
         </div>
@@ -115,4 +140,4 @@ function UpdateAccount() {
   )
 }
 
-export default UpdateAccount
+export default UpdateTransaction

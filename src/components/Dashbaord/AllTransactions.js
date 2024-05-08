@@ -121,9 +121,11 @@ const AllTransactions = ({ accountID, response, transactions}) => {
                             {transaction?.notes}
                           </td>
                           <td className="relative w-1/5 whitespace-nowrap text-center py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
+                          <Link to={`/update-transaction/${transaction?._id}`}>
                             <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">
                               Edit
                             </button>
+                            </Link>
                             <button
                               onClick={() => handleDelete(transaction?._id)}
                               className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700"

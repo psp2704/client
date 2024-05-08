@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext/AuthContext";
 
 export default function Navbar() {
   const { token, logoutUser } = useContext(AuthContext);
-  // useEffect(()=>token,[])
+  // useEffect(()=>token,[token])
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -29,12 +29,12 @@ export default function Navbar() {
                 </div>
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
+                    className="block h-16 w-auto lg:hidden"
                     src={logo}
                     alt="i-novotek"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
+                    className="hidden h-16 w-auto lg:block"
                     src={logo}
                     alt="i-novotek"
                   />

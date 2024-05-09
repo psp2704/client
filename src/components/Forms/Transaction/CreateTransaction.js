@@ -5,8 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 function CreateTransaction() {
 
   const { accountID } = useParams();
+  console.log(accountID)
 
-  const navigate = useNavigate(accountID);
+  const navigate = useNavigate();
 
   const transactionTypes = ["Income", "Expense"];
 

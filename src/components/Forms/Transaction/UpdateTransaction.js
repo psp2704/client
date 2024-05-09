@@ -1,27 +1,12 @@
-import React, { useContext, useEffect, useState, } from 'react'
-import { useParams } from 'react-router-dom'
-import { TransactionContext } from '../../context/TransactionContext/TransactionContext';
+import { useContext, useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom"
+import { TransactionContext } from "../../context/TransactionContext/TransactionContext";
 
 function UpdateTransaction() {
 
-  const { state,  fetchTransaction , updateTransaction } = useContext(TransactionContext);
+  const transactTypes = ["Income", "Expense"];
 
-  const { ID } = useParams();
-
-  useEffect(() => {
-    fetchTransaction(ID);
-  }, [ID]);
-
-  const [formdata, setFormdata] = useState({
-    name: "",
-    transactionType : "",
-    amount: "",
-    category : "",
-    notes: "",
-    account : accountID
-  });
-
-  const accountTypes = [
+  const categories = [
     'Saving',
     'Travel',
     'Investment',
@@ -34,8 +19,28 @@ function UpdateTransaction() {
     'Groceries',
   ];
 
-  // Update formdata whenever state changes
-  useEffect(() => {
+  const id  = useParams();
+
+  const navigate = useNavigate();
+
+  const {state, fetchTransaction, updateTransaction} = useContext(TransactionContext);
+
+  const [formdata, setFormdata] = useState({
+    name: "",
+    transactionType : "",
+    amount: "",
+    category : "",
+    notes: "",
+    account : ""
+  });
+
+  useEffect (()=>{
+    fetchTransaction(id)
+  })
+
+   // Update formdata whenever state changes
+   useEffect(() => {
+    
     if (state && state.transaction) {
       setFormdata({
         name: state.transaction.name || "",
@@ -43,10 +48,12 @@ function UpdateTransaction() {
         amount: state.transaction.amount || "",
         category: state.transaction.category || "",
         notes: state.transaction.notes || "",
-        id: state.transaction.id || ""
+        account: state.transaction.account || ""
       });
     }
   }, [state]);
+
+  const { name, transactionType, amount, category, notes, } = formdata;
 
   const onChangeInput = (e) => {
     console.log(e.target.name, e.target.value);
@@ -54,15 +61,18 @@ function UpdateTransaction() {
   }
 
   //handle the submit form 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateTransaction(formdata, accountID);
+    try {
+      await  updateTransaction(formdata,  id);
+      navigate(`/account-details/${id}`)
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-
-  console.log(account, typeof(accountID));
-
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
+    <>
+          <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col my-24  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -93,7 +103,7 @@ function UpdateTransaction() {
                   required
                 >
                   <option value="">Select Transaction Type</option>
-                  {transactionTypes.map((type, index) => (
+                  {transactTypes.map((type, index) => (
                     <option key={index} value={type}>
                       {type}
                     </option>
@@ -137,6 +147,7 @@ function UpdateTransaction() {
         </div>
       </div>
     </section>
+    </>
   )
 }
 

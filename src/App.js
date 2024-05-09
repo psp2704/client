@@ -12,6 +12,7 @@ import CreateAccountForm from './components/Forms/Account/CreateAccountForm';
 import UpdateAccount from './components/Forms/Account/UpdateAccount';
 import CreateTransaction from './components/Forms/Transaction/CreateTransaction';
 import Footer from './components/Footer/Footer';
+import UpdateTransaction from './components/Forms/Transaction/UpdateTransaction';
 
 function App() {
   return (

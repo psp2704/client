@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState, } from 'react'
 import { AccountContext } from '../../context/AccountContext/AccountContext';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateAccount() {
 
   const { state, account, getSingleAccount , updateAccount } = useContext(AccountContext);
 
   const { accountID } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getSingleAccount(accountID);
@@ -45,17 +46,15 @@ function UpdateAccount() {
   }, [state]);
 
   const onChangeInput = (e) => {
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
     return setFormdata({ ...formdata, [e.target.name]: e.target.value });
   }
 
   //handle the submit form 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateAccount(formdata, accountID);
+    updateAccount(formdata, accountID, navigate);
   }
-
-  console.log(account, typeof(accountID));
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

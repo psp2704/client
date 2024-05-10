@@ -31,7 +31,7 @@ function CreateAccount() {
   const { accountName, initialBalance, notes, accountType } = formdata;
 
   const onChangeInput = (e) => {
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
     return setFormdata({ ...formdata, [e.target.name]: e.target.value });
   }
 

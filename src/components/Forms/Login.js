@@ -1,11 +1,13 @@
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext/AuthContext"
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 
-  const { state, login } = useContext(AuthContext)
+  const { state, login } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   //handle the state
   const [formdata, setFormdata] = useState({
@@ -31,7 +33,7 @@ export default function Login() {
     e.preventDefault();
 
     // Await the login function
-    login(formdata);
+    login(formdata, navigate);
     // Redirect or perform other actions upon successful login
 
     // Handle login errors here

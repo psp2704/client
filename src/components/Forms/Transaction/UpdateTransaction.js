@@ -19,14 +19,14 @@ function UpdateTransaction() {
     'Groceries',
   ];
 
-  const id  = useParams();
+  const {transactID}  = useParams();
 
   const navigate = useNavigate();
 
   const {state, fetchTransaction, updateTransaction} = useContext(TransactionContext);
 
   const [formdata, setFormdata] = useState({
-    name: "",
+    transactName: "",
     transactionType : "",
     amount: "",
     category : "",
@@ -35,15 +35,14 @@ function UpdateTransaction() {
   });
 
   useEffect (()=>{
-    fetchTransaction(id)
-  })
+    fetchTransaction(transactID)
+  },[transactID] )
 
-   // Update formdata whenever state changes
+  //  Update formdata whenever state changes
    useEffect(() => {
-    
     if (state && state.transaction) {
       setFormdata({
-        name: state.transaction.name || "",
+        transactName: state.transaction.transactName || "",
         transactionType: state.transaction.transactionType || "",
         amount: state.transaction.amount || "",
         category: state.transaction.category || "",
@@ -53,10 +52,9 @@ function UpdateTransaction() {
     }
   }, [state]);
 
-  const { name, transactionType, amount, category, notes, } = formdata;
+  const { transactName, transactionType, amount, category, notes, account } = formdata;
 
   const onChangeInput = (e) => {
-    console.log(e.target.name, e.target.value);
     return setFormdata({ ...formdata, [e.target.name]: e.target.value });
   }
 
@@ -64,8 +62,8 @@ function UpdateTransaction() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await  updateTransaction(formdata,  id);
-      navigate(`/account-details/${id}`)
+      await  updateTransaction(formdata,  transactID);
+      navigate(`/account-details/${account}`)
     } catch (error) {
       throw new Error(error.message);
     }
@@ -84,8 +82,8 @@ function UpdateTransaction() {
                   )}
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Name</label>
-                <input onChange={onChangeInput} value={name} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
+                <label htmlFor="transactName" autoComplete="off" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Name</label>
+                <input onChange={onChangeInput} value={transactName} type="text" name="transactName" id="transactName" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="John Doe" required="" />
               </div>
               <div>
                 <label
@@ -112,7 +110,7 @@ function UpdateTransaction() {
               </div>
               <div>
                 <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                <input onChange={onChangeInput} value={amount} type="number" name="amount" id="initialBalance" placeholder="0000" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <input onChange={onChangeInput} value={amount} type="number" name="amount" id="amount" placeholder="0000" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
               </div>
               <div>
                 <label
@@ -141,7 +139,7 @@ function UpdateTransaction() {
                 <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
                 <input onChange={onChangeInput} value={notes} type="text" name="notes" id="notes" placeholder="#travel..." className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
               </div>
-              <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create Transaction</button>
+              <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Transaction</button>
             </form>
           </div>
         </div>

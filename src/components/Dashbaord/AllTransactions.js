@@ -1,38 +1,15 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext/TransactionContext";
-import { AccountContext } from "../context/AccountContext/AccountContext";
 
-const AllTransactions = ({ accountID, response, transactions}) => {
+const AllTransactions = ({ accountID, getAccount, transactions}) => {
   const { deleteTransaction} = useContext(TransactionContext);
-  // const {state} = useContext(AccountContext)
-  // const [updatedTransactions, setUpdatedTransactions] = useState([...state.transactions]);
-
-  // const handleDelete = async (id) => {
-  //   // if (window.confirm("Are you sure? This cannot be undone.")) {
-  //     await deleteTransaction(id);
-  //     // setUpdatedTransactions(transactions.filter((t) => t._id !== id));
-  //     setUpdatedTransactions([...state.transactions])
-  //     // alert("Transaction Deleted Successfully");
-  //   // }
-  // };
-
-  // console.log(state.transactions, updatedTransactions)
-
-  // useEffect(() => {
-  //   setUpdatedTransactions(updatedTransactions);
-  // }, [updatedTransactions]);
-
-
+ 
   const handleDelete = async (id) =>{
      if (window.confirm("Are you sure? This cannot be undone.")) {
       await deleteTransaction(id);
-      // setUpdatedTransactions(transactions.filter((t) => t._id !== id));
-      // setUpdatedTransactions([...state.transactions])
-      // alert("Transaction Deleted Successfully");
-       await response(accountID);
+       await getAccount(accountID);
      }
-
   }
 
   return (
@@ -104,7 +81,7 @@ const AllTransactions = ({ accountID, response, transactions}) => {
                         >
                           <td className="whitespace-nowrap text-center py-4 pl-4 pr-3 text-sm ">
                             <div className="font-medium text-gray-900">
-                              {transaction?.name}
+                              {transaction?.transactName}
                             </div>
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">

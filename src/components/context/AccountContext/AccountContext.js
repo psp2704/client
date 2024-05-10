@@ -100,7 +100,7 @@ export const AccountContextProvider = ({ children }) => {
     }
 
         //Account Update
-        const updateAccount = async (formdata, id) => {
+        const updateAccount = async (formdata, id, navigate) => {
             const res = await axios.put(`${ACCOUNT_URL}/${id}`, formdata, config);
             try {
                 if (res?.data?.status === "success") {
@@ -110,7 +110,7 @@ export const AccountContextProvider = ({ children }) => {
                     });
     
                     //redirect to dashboard
-                    window.location.href = "/dashboard"
+                    navigate("/dashboard")
                 }
             } catch (error) {
                 dispatch({

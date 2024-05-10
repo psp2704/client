@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/20/solid";
-// import { accountContext } from "../context/AccountContext/AccountContext";
 import AllTransactions from "./AllTransactions";
 import { AccountContext } from "../context/AccountContext/AccountContext";
 
@@ -11,9 +10,11 @@ export default function AccountDetails() {
  
   const { accountID } = useParams();
 
-  useEffect(() => {
-    getSingleAccount(accountID);
-  }, [accountID]);
+  // useEffect(() => {
+  //   getSingleAccount(accountID);
+  // }, [accountID]);
+
+  getSingleAccount(accountID)
 
   const handleResponse = (accountID) =>{
     getSingleAccount(accountID);
@@ -33,18 +34,6 @@ export default function AccountDetails() {
     }
   }, 0);
 
-  // console.log(Number(account?.transactionData?.map(t => t.amount)))
-
-
-  // //Calculate total Expenses
-  // const totalExpenses = account?.transactions?.reduce((acc, transaction) => {
-  //   if (transaction?.transactionType === "Expense") {
-  //     return acc + transaction?.amount;
-  //   } else {
-  //     return acc;
-  //   }
-  // }, 0);
-
   const totalExpenses = account?.transactionData?.reduce((acc, transaction) => {
     // Check if the transaction type is "Income"
     if (transaction?.transactionType === 'Expense') {
@@ -55,13 +44,6 @@ export default function AccountDetails() {
       return acc;
     }
   }, 0);
-
-  console.log(totalExpenses)
-
-    // const accountID = "";
-    // const account = {
-    //   transaction : ''
-    // }
 
   return (
     <>
@@ -150,7 +132,7 @@ export default function AccountDetails() {
            <AllTransactions
             transactions = {account?.transactionData}
             accountID={accountID}
-            response = {handleResponse}
+            getAccount = {handleResponse}
           /> 
         </>
        )} 

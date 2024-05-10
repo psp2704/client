@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext/AuthContext';
 
 function Register() {
 
     const {state, registerUser } = useContext(AuthContext);
+    const navigate =  useNavigate()
 
     const [formdata, setFormdata] = useState({
         fullname: "",
@@ -23,7 +24,7 @@ function Register() {
     //handle the submit form 
     const handleSubmit = (e) => {
         e.preventDefault();
-        registerUser(formdata);
+        registerUser(formdata, navigate);
     }
 
     return (

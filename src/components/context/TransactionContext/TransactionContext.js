@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 import axios from 'axios';
 import { TRANSACTION_URL } from "../../../utils/apiUrls";
-import { redirect } from "react-router-dom";
 
 export const TransactionContext = createContext();
 
@@ -82,12 +81,14 @@ export const TransactionProvider = ({ children }) => {
     const fetchTransaction = async (id) => {
         try {
             const res = await axios.get(`${TRANSACTION_URL}/${id}`, config);
-            // dispatch({
-            //     type: 'FETCH_TRANSACTIONS_SUCCESS',
-            //     payload: res.data
-            // });
 
-            console.log(res.data)
+            if(res?.data?.status === "success"){
+            dispatch({
+                type: 'TRANSACTION_UPDATED_SUCCESS',
+                payload: res.data?.transaction
+            });
+        }
+
         } catch (error) {
             dispatch({
                 type: 'FETCH_TRANSACTIONS_FAIL',
@@ -96,7 +97,7 @@ export const TransactionProvider = ({ children }) => {
         }
     }
 
-    const createTransaction = async (formData, accountID) => {
+    const createTransaction = async (formData) => {
         try {
             const res = await axios.post(TRANSACTION_URL, formData, config);
             dispatch({
@@ -111,15 +112,16 @@ export const TransactionProvider = ({ children }) => {
                 type: 'FAILED_ERROR',
                 payload: error?.response?.data?.message
             });
+            console.log(error?.response?.data?.message)
         }
     }
 
     const updateTransaction = async (formdata, id) => {
         try {
-            const res = await axios.update(`${TRANSACTION_URL}/${id}`, formdata, config);
+            const res = await axios.put(`${TRANSACTION_URL}/${id}`, formdata, config);
             dispatch({
                 type: 'TRANSACTION_UPDATED_SUCCESS',
-                payload: res.data
+                payload: res.data.transaction
             });
         } catch (error) {
             dispatch({
@@ -131,7 +133,7 @@ export const TransactionProvider = ({ children }) => {
 
     const deleteTransaction = async (id) => {
         try {
-            const res = await axios.delete(`${TRANSACTION_URL}/${id}`, config);
+            await axios.delete(`${TRANSACTION_URL}/${id}`, config);
             dispatch({
                 type: 'TRANSACTION_DELETED_SUCCESS',
                 payload: id

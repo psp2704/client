@@ -1,14 +1,17 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const { token, logoutUser } = useContext(AuthContext);
   // useEffect(()=>token,[token])
+
+  const navigate = useNavigate()
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -82,7 +85,7 @@ export default function Navbar() {
                   <>
                     {token && (
                       <button
-                        onClick={()=>logoutUser()}
+                        onClick={()=>logoutUser(navigate)}
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Logout

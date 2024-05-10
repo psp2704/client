@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
@@ -101,7 +101,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   //register action
-  const registerUser = async (formdata) =>{
+  const registerUser = async (formdata, navigate) =>{
     const config =  {
       headers : {
         "Content-Type" : "application/json",
@@ -118,7 +118,7 @@ export const AuthContextProvider = ({ children }) => {
       };
 
       //redirect to dashboard
-      window.location.href = "/dashboard"
+      navigate("/dashboard")
       console.log(res);
     } catch (error) {
       dispatch({
@@ -129,7 +129,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   //login action
-  const login = async (formdata) => {
+  const login = async (formdata, navigate) => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +144,8 @@ export const AuthContextProvider = ({ children }) => {
         })
       }
       //Redirect
-      window.location.href = "/dashboard"
+      navigate("/dashboard")
+      // window.location.href = "/dashboard"
     } catch (error) {
       dispatch({
         type: LOGIN_FAILED,
@@ -174,14 +175,14 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   //logout
-  const logoutUser = async () => {
+  const logoutUser = async (navigate) => {
 
     localStorage.removeItem("userAuth");
     try {
       dispatch({ type: LOGOUT });
 
       //Redirect
-      window.location.href = "/"
+      navigate("/")
     } catch (error) {
       dispatch({
         type: "ERROR",

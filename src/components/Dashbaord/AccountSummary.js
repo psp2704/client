@@ -1,6 +1,6 @@
 import React from "react";
 
-const AccountSummary = () => {
+const AccountSummary = ( {accountBalance}) => {
   return (
     <>
       <div className="px-4 py-4 max-w-4xl mx-auto mb-8 text-center">
@@ -145,7 +145,7 @@ const AccountSummary = () => {
                 <div className="flex flex-wrap items-center justify-between -m-1">
                   <div className="w-auto p-1">
                     <h2 className="font-medium text-3xl text-black tracking-tighter">
-                      $91.42
+                      $ {accountBalance}
                     </h2>
                   </div>
                   <div className="w-auto p-1">

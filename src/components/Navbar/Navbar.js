@@ -30,7 +30,7 @@ export default function Navbar() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-shrink-0 items-center">
+                {/* <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-16 w-auto lg:hidden"
                     src={logo}
@@ -41,7 +41,7 @@ export default function Navbar() {
                     src={logo}
                     alt="i-novotek"
                   />
-                </div>
+                </div> */}
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   <Link
                     to="/"

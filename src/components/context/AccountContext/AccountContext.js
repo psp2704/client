@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { ACCOUNT_URL } from '../../../utils/apiUrls';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 export const AccountContext = createContext();
 
 const initialState = {
-    userAuth: JSON.parse(localStorage.getItem("userAuth")),
+    // userAuth: JSON.parse(localStorage.getItem("userAuth")),
     account: null,
     transactions: [],
     error: null,
@@ -69,10 +70,12 @@ const accountReducer = (state, action) => {
 export const AccountContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
 
+    const {token} = useContext(AuthContext)
+
     const config = {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${state?.userAuth?.token}`
+            Authorization: `Bearer ${token}`
         }
     }
 

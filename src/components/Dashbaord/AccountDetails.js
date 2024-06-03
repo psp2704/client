@@ -10,11 +10,9 @@ export default function AccountDetails() {
  
   const { accountID } = useParams();
 
-  // useEffect(() => {
-  //   getSingleAccount(accountID);
-  // }, [accountID]);
-
-  getSingleAccount(accountID)
+  useEffect(() => {
+    getSingleAccount(accountID);
+  }, [accountID ]);
 
   const handleResponse = (accountID) =>{
     getSingleAccount(accountID);

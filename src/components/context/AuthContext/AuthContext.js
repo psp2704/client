@@ -101,19 +101,19 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   //register action
-  const registerUser = async (formdata, navigate) =>{
-    const config =  {
-      headers : {
-        "Content-Type" : "application/json",
+  const registerUser = async (formdata, navigate) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
       }
     }
     try {
       const res = await axios.post(`${USER_URL}/register`, formdata, config);
 
-      if(res?.data?.status === 'success') {
+      if (res?.data?.status === 'success') {
         dispatch({
-          type : REGISTER_SUCCESS,
-          payload : res.data,
+          type: REGISTER_SUCCESS,
+          payload: res.data,
         })
       };
 
@@ -122,8 +122,8 @@ export const AuthContextProvider = ({ children }) => {
       console.log(res);
     } catch (error) {
       dispatch({
-        type : REGISTER_FAIL,
-        payload : error?.response?.data?.message,
+        type: REGISTER_FAIL,
+        payload: error?.response?.data?.message,
       })
     }
   }
@@ -142,11 +142,18 @@ export const AuthContextProvider = ({ children }) => {
           type: LOGIN_SUCCESS,
           payload: res.data
         })
+
+        //Redirect
+        navigate("/dashboard")
+
+      } else {
+        dispatch({
+          type: LOGIN_FAILED,
+          payload: res?.data?.message,
+        });
       }
-      //Redirect
-      navigate("/dashboard")
-      // window.location.href = "/dashboard"
     } catch (error) {
+      console.log(error)
       dispatch({
         type: LOGIN_FAILED,
         payload: error?.response?.data?.message,
@@ -192,7 +199,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ state, token: state?.userAuth?.token, profile:state?.profile?.userData?.accounts, login, getProfile, registerUser, error: state?.error, logoutUser }}>
+    <AuthContext.Provider value={{ state, token: state?.userAuth?.token, profile: state?.profile?.userData?.accounts, login, getProfile, registerUser, error: state?.error, logoutUser }}>
       {children}
     </AuthContext.Provider>
   )

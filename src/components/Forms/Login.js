@@ -18,26 +18,13 @@ export default function Login() {
 
   //handle data change
   const onChangeInput = (e) => {
-    console.log(e.target.name)
     return setFormdata({ ...formdata, [e.target.name]: e.target.value });
   }
 
-  //handle the submit  form
-  // const  handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   //login action
-  //   login(formdata);
-
-  // }
   const handleSubmit =  (e) => {
     e.preventDefault();
-
     // Await the login function
     login(formdata, navigate);
-    // Redirect or perform other actions upon successful login
-
-    // Handle login errors here
-    console.log(state?.error)
   }
   return (
     <>

@@ -75,7 +75,7 @@ const HomePage = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap p-8 text-center md:text-left hover:bg-white rounded-md hover:shadow-xl transition duration-200">
+              <div className="flex flex-wrap p-8 text-center md:text-left transition duration-200">
                 <div className="w-full md:w-auto mb-6 md:mb-0 md:pr-6">
                   <div className="inline-flex h-14 w-14 mx-auto mt-4 items-center justify-center text-white bg-green-500 rounded-lg">
                     <svg

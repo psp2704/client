@@ -15,7 +15,7 @@ import { USER_URL } from "../../../utils/apiUrls";
 export const AuthContext = createContext();
 
 //crete initial state 
-const INITIAL_STATE = {
+let INITIAL_STATE = {
   userAuth: JSON.parse(localStorage.getItem("userAuth")),
   loading: false,
   profie: null,
@@ -48,7 +48,7 @@ const reducer = (state, action) => {
       localStorage.setItem("userAuth", JSON.stringify(payload));
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: null,
         userAuth: payload,
       };

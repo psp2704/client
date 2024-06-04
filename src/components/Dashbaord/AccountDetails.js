@@ -1,17 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import AllTransactions from "./AllTransactions";
 import { AccountContext } from "../context/AccountContext/AccountContext";
+import Loading from "../../utils/Loading";
 
 export default function AccountDetails() {
   // const { getAccountDetailsAction, account } = useContext(accountContext);
   const {getSingleAccount, account} = useContext(AccountContext);
- 
+  const [isLoading, setIsLoading] = useState(true);
+
   const { accountID } = useParams();
 
   useEffect(() => {
     getSingleAccount(accountID);
+      setIsLoading(false)
   }, [accountID ]);
 
   const handleResponse = (accountID) =>{
@@ -45,7 +48,7 @@ export default function AccountDetails() {
 
   return (
     <>
-      {account?.transactions?.length <= 0 ? (
+      {isLoading ? <Loading /> : account?.transactions?.length <= 0 ? (
         <>
           <h2 className="text-center text-red-500 m-10">
             This Account Don't have any transaction
@@ -133,7 +136,7 @@ export default function AccountDetails() {
             getAccount = {handleResponse}
           /> 
         </>
-       )} 
+       ) }
     </>
   );
 }

@@ -1,15 +1,15 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext/TransactionContext";
 
-const AllTransactions = ({ accountID, getAccount, transactions}) => {
-  const { deleteTransaction} = useContext(TransactionContext);
- 
-  const handleDelete = async (id) =>{
-     if (window.confirm("Are you sure? This cannot be undone.")) {
+const AllTransactions = ({ accountID, getAccount, transactions }) => {
+  const { deleteTransaction } = useContext(TransactionContext);
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure? This cannot be undone.")) {
       await deleteTransaction(id);
-       await getAccount(accountID);
-     }
+      await getAccount(accountID);
+    }
   }
 
   return (
@@ -63,8 +63,14 @@ const AllTransactions = ({ accountID, getAccount, transactions}) => {
                           scope="col"
                           className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                         >
-                          Note
+                          Category
                         </th>
+                        {/* <th
+                          scope="col"
+                          className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                        >
+                          Note
+                        </th> */}
                         <th
                           scope="col"
                           className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
@@ -77,31 +83,32 @@ const AllTransactions = ({ accountID, getAccount, transactions}) => {
                       {transactions?.map((transaction) => (
                         <tr
                           key={transaction?._id}
-                          className={transaction?.color}
+                        // className={transaction?.color}
                         >
-                          <td className="whitespace-nowrap text-center py-4 pl-4 pr-3 text-sm ">
-                            <div className="font-medium text-gray-900">
-                              {transaction?.transactName}
-                            </div>
+                          <td className="whitespace-nowrap text-center py-4 pl-4 pr-3 text-sm text-gray-500">
+                            {transaction?.transactName}
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-                            <div className="text-gray-900">
-                              {transaction?.transactionType}
-                            </div>
+                            {transaction?.transactionType}
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-                            <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            {transaction?.transactionType === "Income" ? <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
                               $ {transaction?.amount}
-                            </span>
+                            </span> : <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">
+                              $ {transaction?.amount}
+                            </span>}
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-                            {transaction?.notes}
+                            {transaction?.category}
                           </td>
+                          {/* <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                            {transaction?.notes}
+                          </td> */}
                           <td className="relative w-1/5 whitespace-nowrap text-center py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
-                          <Link to={`/update-transaction/${transaction?._id}`}>
-                            <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">
-                              Edit
-                            </button>
+                            <Link to={`/update-transaction/${transaction?._id}`}>
+                              <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">
+                                Edit
+                              </button>
                             </Link>
                             <button
                               onClick={() => handleDelete(transaction?._id)}

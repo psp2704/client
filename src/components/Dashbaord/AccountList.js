@@ -76,7 +76,7 @@ const AccountList = ({ accounts }) => {
                             {acc?.accountName}
                           </h3>
                         </div>
-                        <Link to={`/account-details/${acc?._id}`}>
+                        <Link to={`/account-details/${acc?._id}`} className="mb-5 md:mb-0">
                           <div className="w-full md:w-1/2 md:text-right">
                             <div className="inline-flex items-center leading-6 text-green-500 group-hover:text-green-600 font-medium transition duration-200">
                               <span className="mr-2">View Account</span>
@@ -96,10 +96,10 @@ const AccountList = ({ accounts }) => {
                           </div>
                         </Link>
                         <div>
-                        <Link to={`/update-account/${acc?._id}`}>
-                          <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
+                          <Link to={`/update-account/${acc?._id}`}>
+                            <button className="border-2 text-center border-gray-300 px-4 py-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:border-indigo-900">Edit</button>
                           </Link>
-                          <button onClick={()=> handleDeleteClick(`${acc?._id}`)} className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
+                          <button onClick={() => handleDeleteClick(`${acc?._id}`)} className="border-2 text-center border-gray-300 ml-3 px-4 py-2 rounded-lg text-red-400 hover:text-red-700 hover:border-red-700">Delete</button>
                         </div>
                       </div>
                     </div>

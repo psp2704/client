@@ -89,7 +89,12 @@ const AllTransactions = ({ accountID, getAccount, transactions }) => {
                             {transaction?.transactName}
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-                            {transaction?.transactionType}
+                            {/* {transaction?.transactionType} */}
+                            {transaction?.transactionType === "Income" ? <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                              {transaction?.transactionType}
+                            </span> : <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">
+                              {transaction?.transactionType}
+                            </span>}                      
                           </td>
                           <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
                             {transaction?.transactionType === "Income" ? <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">

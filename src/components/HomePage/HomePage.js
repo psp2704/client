@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 
 const HomePage = () => {
@@ -115,7 +116,7 @@ const HomePage = () => {
         </div>
       </section>
       {/* Call to Action */}
-      <section className="relative py-24 md:pb-32 bg-white overflow-hidden">
+      <section className="relative py-24 md:pb-24 bg-white overflow-hidden">
         <div className="relative container px-4 mx-auto">
           <div className="xl:max-w-4xl mb-18 md:mb-16 mx-auto text-center">
             <span className="inline-block py-px px-2 mb-4 text-xs leading-5 text-green-500 bg-green-100 font-medium uppercase rounded-full shadow-sm">
@@ -129,20 +130,20 @@ const HomePage = () => {
               We believe a diverse team, approaches to work and transparency are
               key to our success.
             </p>
-            <a
+            <Link
               className="inline-flex items-center justify-center px-7 py-3 h-14 w-full md:w-auto text-lg leading-7 text-green-50 bg-green-500 hover:bg-green-600 font-medium focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 border border-transparent rounded-md shadow-sm"
-              href="#"
+              to="/login"
             >
               Get Started
-            </a>
+            </Link>
           </div>
-          <div className="relative max-w-4xl mx-auto">
+          {/* <div className="relative max-w-4xl mx-auto">
             <img
               className="relative"
               src="https://cdn.pixabay.com/photo/2015/01/28/22/20/bookkeeping-615384_1280.jpg"
               alt="landing"
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </>

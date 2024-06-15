@@ -51,7 +51,7 @@ function UpdateTransaction() {
     }
   }, [state]);
 
-  const { transactName, transactionType, amount, category, notes, account } = formdata;
+  const { transactName, transactionType, amount, category, account } = formdata;
 
   const onChangeInput = (e) => {
     return setFormdata({ ...formdata, [e.target.name]: e.target.value });

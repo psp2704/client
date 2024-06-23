@@ -1,6 +1,5 @@
 import { createContext, useReducer } from "react";
 import axios from 'axios';
-import { TRANSACTION_URL } from "../../../utils/apiUrls";
 
 export const TransactionContext = createContext();
 
@@ -80,7 +79,7 @@ export const TransactionProvider = ({ children }) => {
 
     const fetchTransaction = async (id) => {
         try {
-            const res = await axios.get(`${TRANSACTION_URL}/${id}`, config);
+            const res = await axios.get(`${process.env.TRANSACTION_URL}/${id}`, config);
 
             if(res?.data?.status === "success"){
             dispatch({
@@ -99,7 +98,7 @@ export const TransactionProvider = ({ children }) => {
 
     const createTransaction = async (formData) => {
         try {
-            const res = await axios.post(TRANSACTION_URL, formData, config);
+            const res = await axios.post(process.env.TRANSACTION_URL, formData, config);
             dispatch({
                 type: 'TRANSACTION_CREATED_SUCCESS',
                 payload: res.data
@@ -118,7 +117,7 @@ export const TransactionProvider = ({ children }) => {
 
     const updateTransaction = async (formdata, id) => {
         try {
-            const res = await axios.put(`${TRANSACTION_URL}/${id}`, formdata, config);
+            const res = await axios.put(`${process.env.TRANSACTION_URL}/${id}`, formdata, config);
             dispatch({
                 type: 'TRANSACTION_UPDATED_SUCCESS',
                 payload: res.data.transaction
@@ -133,7 +132,7 @@ export const TransactionProvider = ({ children }) => {
 
     const deleteTransaction = async (id) => {
         try {
-            await axios.delete(`${TRANSACTION_URL}/${id}`, config);
+            await axios.delete(`${process.env.TRANSACTION_URL}/${id}`, config);
             dispatch({
                 type: 'TRANSACTION_DELETED_SUCCESS',
                 payload: id

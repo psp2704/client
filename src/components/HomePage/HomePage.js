@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 
 const HomePage = () => {
+  console.log(process.env.USER_URL)
+  console.log(process.env)
   return (
     <>
       <Header />

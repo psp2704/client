@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { createContext, useContext, useReducer } from 'react';
-// import { process.env.ACCOUNT_URL } from '../../../utils/apiUrls';
 import { AuthContext } from '../AuthContext/AuthContext';
 
 export const AccountContext = createContext();
@@ -83,7 +82,7 @@ export const AccountContextProvider = ({ children }) => {
     const createAccount = async (formdata) => {
 
         try {
-            const res = await axios.post(process.env.ACCOUNT_URL, formdata, config);
+            const res = await axios.post(process.env.REACT_APP_ACCOUNT_URL, formdata, config);
             if (res?.data?.account?.status === 'success') {
                 dispatch({
                     type: 'ACCOUNT_CREATED_SUCCESS',
@@ -104,7 +103,7 @@ export const AccountContextProvider = ({ children }) => {
 
         //Account Update
         const updateAccount = async (formdata, id, navigate) => {
-            const res = await axios.put(`${process.env.ACCOUNT_URL}/${id}`, formdata, config);
+            const res = await axios.put(`${process.env.REACT_APP_ACCOUNT_URL}/${id}`, formdata, config);
             try {
                 if (res?.data?.status === "success") {
                     dispatch({
@@ -127,7 +126,7 @@ export const AccountContextProvider = ({ children }) => {
     const getSingleAccount = async (id) => {
 
         try {
-            const res = await axios.get(`${process.env.ACCOUNT_URL}/${id}`, config);
+            const res = await axios.get(`${process.env.REACT_APP_ACCOUNT_URL}/${id}`, config);
             if (res?.data?.status === 'success') {
                 dispatch({
                     type: "FETCH_ACCOUNT_SUCCESS",
@@ -144,7 +143,7 @@ export const AccountContextProvider = ({ children }) => {
 
     // delete account
     const deleteAccount = async (id) => {
-        const res = await axios.delete(`${process.env.ACCOUNT_URL}/${id}`, config);
+        const res = await axios.delete(`${process.env.REACT_APP_ACCOUNT_URL}/${id}`, config);
         try {
             if (res?.data?.status === "success") {
                 dispatch({

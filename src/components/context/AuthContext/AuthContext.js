@@ -9,7 +9,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
 } from "./authActionTypes";
-import { USER_URL } from "../../../utils/apiUrls";
+// import { process.env.USER_URL } from "../../../utils/apiUrls";
 
 
 //create the aulthe context
@@ -109,7 +109,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
     try {
-      const res = await axios.post(`${USER_URL}/register`, formdata, config);
+      const res = await axios.post(`${process.env.USER_URL}/register`, formdata, config);
 
       if (res?.data?.status === 'success') {
         dispatch({
@@ -137,7 +137,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
     try {
-      const res = await axios.post(`${USER_URL}/login`, formdata, config);
+      const res = await axios.post(`${process.env.USER_URL}/login`, formdata, config);
       if (res?.data?.status === "success") {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -172,7 +172,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
     try {
-      const res = await axios.get(`${USER_URL}/profile`, config);
+      const res = await axios.get(`${process.env.USER_URL}/profile`, config);
       dispatch({ type: FETCH_PROFILE_SUCCESS, payload: res.data })
     } catch (error) {
       dispatch({
